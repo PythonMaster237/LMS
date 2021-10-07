@@ -1,3 +1,8 @@
+import lesson13 
+
+print(id(lesson13.say_hello))
+
+
 import time
 def my_decorator(func):
 	def wrapper(*args, **kwargs):
