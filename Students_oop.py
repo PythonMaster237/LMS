@@ -1,15 +1,33 @@
 import json
 import csv
 
+
 class Student:
 
-	def __init__(self, first_name, last_name, email, age, address, gender):
+	students_list = []
+	numbers_of_people = 0
+
+	def __init__(self, first_name='0', last_name='0', 
+		email='0', age='0', address='0', gender='0'):
 		self.first_name = first_name
 		self.last_name = last_name
 		self.email = email
 		self.age = age
 		self.address = address
-		self.gender = gender	
+		self.gender = gender
+		Student.numbers_of_people += 1
+		Student.students_list.append(Student.to_dict(self))
+
+	@property
+	def email(self):
+		return self._email
+
+	@email.setter
+	def email(self, email):
+		if email.startswith('@') or email.endswith('@'):
+			raise ValueError
+		elif email.find('@') > 0:
+			self._email = email
 
 	def __str__(self):
 		return '{} {} {} {} {} {}'.format(
@@ -31,8 +49,30 @@ class Student:
 			student_dict[field] = getattr(self, field, '')
 		return student_dict
 
-	def from_dict(self):
-		pass
+	@classmethod
+	def from_dict(cls, dict_data):
+		obj = cls()
+		for key in dict_data:
+			setattr(obj, key, dict_data[key])
+		return obj
+
+	@classmethod
+	def get_students_list(cls):
+		return '{} \n Numbers of people:\t{}'.format(
+			cls.students_list, cls.numbers_of_people)
+
+
+	def __lt__(self, other):
+		return self.age < other.age
+
+	def __le__(self, other):
+		return self.age <= other.age
+
+	def __gt__(self, other):
+		return self.age > other.age
+
+	def __ge__(self, weight):
+		return self.age >= other.age
 
 
 class Group:
@@ -109,7 +149,6 @@ class Group:
 			print(studs)
 
 	def load_students(self, value):
-#		list_load = []
 		for st in value:
 			st = Student(
 				st[0],
@@ -121,20 +160,12 @@ class Group:
 				)
 			self.append(st)
 
+
 stud = Student('Mary', 'D', 'mail@mail.com', '19', 'Huston', 'F')
 stud2 = Student('John', 'S', 'new_mail@mail.com', '21', 'London', 'M')
 stud4 = Student('Andy', 'H', 'more_mail@mail.com', '29', 'Brighton', 'M')
 studs = [stud, stud2, stud4]
 group = Group(studs)
-
-studs_load = []
-#Group.add_student(group)
-#Group.print_students_list(group)
-#Group.calculate_avg_age(group)
-#Group.dump_csv(group)
-#Group.load_from_csv(studs_load)
-#Group.dump_students_json(group)
-#Group.load_from_json(studs_load)
 
 stud_list = [
 ['Joma', 'I', 'some_mail@mail.com', '28', 'Texas', 'M'],
@@ -142,6 +173,27 @@ stud_list = [
 ['Sandra', 'B', 'sandramail@mail.com', '40', 'Paris', 'F']
 ]
 
-Group.load_students(studs, stud_list)
-group = Group(studs)
-Group.print_students_list(group)
+studs_load = []
+#Group.add_student(group)				# 18.05
+#Group.print_students_list(group)
+#Group.calculate_avg_age(group)
+#Group.dump_csv(group)
+#Group.load_from_csv(studs_load)
+#Group.dump_students_json(group)
+#Group.load_from_json(studs_load)
+
+#Group.load_students(studs, stud_list)		
+#group = Group(studs)
+#Group.print_students_list(group)
+
+dict_student = {
+'first_name': 'Ashley', 'last_name': 'U', 'email': 'Ashleymail@mail.com', 
+	'age': '24', 'address': 'Mexico', 'gender': 'F'
+	}
+
+#print(stud > stud2)						# 22.09
+#print(stud < stud2)
+#print(Student.get_students_list())
+#print(Student.students_list)
+#print(Student.from_dict(dict_student))
+
