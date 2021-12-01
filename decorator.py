@@ -1,6 +1,6 @@
 import lesson13 
 
-print(id(lesson13.say_hello))
+#print(id(lesson13.say_hello))
 
 
 import time
@@ -25,7 +25,7 @@ def my_func(num):
 def sum_two_numbers(a, b):
 	print(a + b)
 
-my_func = my_decorator(my_func)
-sum_two_numbers = my_decorator(sum_two_numbers)
-my_func(3)
-sum_two_numbers(4, 5)
+#my_func = my_decorator(my_func)
+#sum_two_numbers = my_decorator(sum_two_numbers)
+#my_func(3)
+#sum_two_numbers(4, 5)

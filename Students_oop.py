@@ -81,6 +81,18 @@ class Group:
 		self.students_list = students_list
 		self.name_group = name_group
 
+	def __iter__(self):
+		self.index = 0
+		return self
+
+	def __next__(self):
+		if self.index < len(self.students_list):
+			x = self.students_list[self.index]
+			self.index += 1
+			return x
+		else:
+			raise StopIteration
+
 	def print_students_list(self):
 		for student in self.students_list:
 			student.print_student()
@@ -174,26 +186,38 @@ stud_list = [
 ]
 
 studs_load = []
-#Group.add_student(group)				# 18.05
-#Group.print_students_list(group)
-#Group.calculate_avg_age(group)
-#Group.dump_csv(group)
-#Group.load_from_csv(studs_load)
-#Group.dump_students_json(group)
-#Group.load_from_json(studs_load)
-
-#Group.load_students(studs, stud_list)		
-#group = Group(studs)
-#Group.print_students_list(group)
 
 dict_student = {
 'first_name': 'Ashley', 'last_name': 'U', 'email': 'Ashleymail@mail.com', 
 	'age': '24', 'address': 'Mexico', 'gender': 'F'
 	}
 
-#print(stud > stud2)						# 22.09
-#print(stud < stud2)
-#print(Student.get_students_list())
-#print(Student.students_list)
-#print(Student.from_dict(dict_student))
 
+if __name__ == '__main__':
+
+	#Group.add_student(group)				# 18.05
+	#Group.print_students_list(group)
+	#Group.calculate_avg_age(group)
+	#Group.dump_csv(group)
+	#Group.load_from_csv(studs_load)
+	#Group.dump_students_json(group)
+	#Group.load_from_json(studs_load)
+
+	#Group.load_students(studs, stud_list)		
+	#group = Group(studs)
+	#Group.print_students_list(group)	
+
+
+	#print(stud > stud2)						# 22.09
+	#print(stud < stud2)
+	#print(Student.get_students_list())
+	#print(Student.students_list)
+	#print(Student.from_dict(dict_student))
+
+	#iterarion_students = iter(group)			# 04.10
+	#print(next(group))
+	#print(next(group))
+	#print(next(group))
+	#print(next(group))
+	#for student in iterarion_students:
+	#	print(student)
